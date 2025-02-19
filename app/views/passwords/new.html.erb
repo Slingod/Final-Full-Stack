@@ -1,0 +1,14 @@
+<h1>Mot de passe oublié ?</h1>
+
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
+<%= form_with url: passwords_path, method: :post, local: true do |form| %>
+  <div class="field">
+    <%= form.label :email, "Adresse email" %>
+    <%= form.email_field :email, required: true, autofocus: true, autocomplete: "email", placeholder: "Entrez votre adresse email", value: params[:email] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Envoyer les instructions de réinitialisation" %>
+  </div>
+<% end %>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title><%= content_for(:title) || "New era of Lissoise" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%# PWA manifest pour installation sur mobile %>
+  <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <%= stylesheet_link_tag 'app', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <h1 class="display-4">NEL</h1>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <span class="navbar-text text-white mx-2">Bonjour <%= current_user.first_name %> 👋</span>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <span class="navbar-text text-white mx-2">Welcome to New era of Lissoise! ​​Log in to join an event</span>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Register", signup_path, class: "btn btn-success mx-2" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", login_path, class: "btn btn-info mx-2" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Contenu principal -->
+  <div class="container mt-4">
+    <%= yield %>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer bg-dark text-white text-center py-3">
+    <div class="container">
+      <p class="mb-0">© <%= Time.now.year %> New era of Lissoise - All rights reserved</p>
+    </div>
+  </footer>
+</body>
+</html>

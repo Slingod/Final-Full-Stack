@@ -1,0 +1,230 @@
+@import "bootstrap";
+
+/*
+ *= require_self
+ *= require_tree .
+ */
+
+/* Global style for the page body */
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- NAVIGATION BAR STYLES --- */
+.navbar {
+  background-color: #3f6e609d; /* Semi-transparent background color */
+}
+
+/* Styles for the navbar brand and links */
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+/* Change link color on hover */
+.navbar-nav .nav-link:hover {
+  color: #f8f9fa;
+}
+
+/* Style for buttons inside the navbar */
+.navbar .btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* --- ENSURE THE FOOTER STAYS AT THE BOTTOM --- */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensures the container takes the remaining space */
+.container {
+  flex: 1;
+}
+
+/* Footer always stays at the bottom */
+.footer {
+  margin-top: auto;
+}
+
+/* --- FIX EVENT CARDS STYLES --- */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensures card body elements are aligned correctly */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- ALIGN BUTTONS INSIDE CARDS --- */
+.card .btn {
+  margin: 5px;
+}
+
+/* --- FIX NAVBAR BULLET POINT ISSUE --- */
+.navbar .navbar-nav {
+  list-style: none; /* Removes default list styles */
+  padding-left: 0;
+}
+
+.navbar .navbar-nav li {
+  display: inline-block;
+}
+
+/* --- BUTTON STYLES --- */
+.btn-primary,
+.btn-danger {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
+  border: none;
+  color: #ffffff;
+}
+
+/* Hover effect for primary and danger buttons */
+.btn-primary:hover,
+.btn-danger:hover {
+  background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
+}
+
+/* --- FORM STYLES --- */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Style for form labels */
+label {
+  font-weight: bold;
+}
+
+/* Input field styling */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+/* Style for submit button */
+input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+}
+
+/* --- CONTAINER STYLES --- */
+.container {
+  padding: 20px;
+}
+
+/* --- HEADINGS STYLES --- */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000b4;
+}
+
+/* --- FLASH MESSAGE STYLES --- */
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Success alert message */
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+/* Error alert message */
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+/* --- MAIN HEADER STYLES --- */
+header h1 {
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- EVENT CARD CONTAINER --- */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* --- EVENT CARD STYLES --- */
+.card {
+  transition: transform 0.2s;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color: #343a40;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Hover effect for event cards */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Event card title */
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Event card text */
+.card-text {
+  color: #6c757d;
+}
+
+/* --- EVENT CARD BUTTON STYLES --- */
+.btn-primary {
+  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
+  border: none;
+  color: #ffffff;
+}
+
+/* Hover effect for primary button */
+.btn-primary:hover {
+  background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
+}
+
+/* --- NAVBAR LINK STYLES --- */
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+/* Navbar link hover effect */
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #f8f9fa;
+}

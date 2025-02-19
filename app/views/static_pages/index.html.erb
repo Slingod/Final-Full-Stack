@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to New Era of Lissoise !</h1>
+  <p class="lead">Discover events near you.</p>
+  <hr class="my-4">
+  <p>Click on an event for more details.</p>
+  <a class="btn btn-primary btn-lg" href="/events/new" role="button">Create an event</a>
+</div>
+<div class="container">
+  <% @events.each do |event| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= event.title %></h5>
+        <p class="card-text"><%= event.description %></p>
+        <a href="/events/<%= event.id %>" class="btn btn-primary">View the event</a>
+      </div>
+    </div>
+  <% end %>
+</div>
