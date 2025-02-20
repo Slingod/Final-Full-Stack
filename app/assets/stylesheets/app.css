@@ -8,13 +8,14 @@
 /* Global style for the page body */
 body {
   font-family: 'Arial', sans-serif;
-  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
+  background-image: linear-gradient(90deg, #33b6e2da, #5e62b0d3, #dc307ddc);
   color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
 /* --- NAVIGATION BAR STYLES --- */
+/* Styles for the navigation bar */
 .navbar {
   background-color: #3f6e609d; /* Semi-transparent background color */
 }
@@ -40,6 +41,7 @@ body {
 }
 
 /* --- ENSURE THE FOOTER STAYS AT THE BOTTOM --- */
+/* Ensures the footer stays at the bottom of the page */
 html, body {
   height: 100%;
 }
@@ -60,6 +62,7 @@ body {
 }
 
 /* --- FIX EVENT CARDS STYLES --- */
+/* Ensures card elements are displayed correctly */
 .card {
   display: flex;
   flex-direction: column;
@@ -72,11 +75,13 @@ body {
 }
 
 /* --- ALIGN BUTTONS INSIDE CARDS --- */
+/* Ensures buttons inside cards are properly spaced */
 .card .btn {
   margin: 5px;
 }
 
 /* --- FIX NAVBAR BULLET POINT ISSUE --- */
+/* Removes default list styles from navbar links */
 .navbar .navbar-nav {
   list-style: none; /* Removes default list styles */
   padding-left: 0;
@@ -87,6 +92,7 @@ body {
 }
 
 /* --- BUTTON STYLES --- */
+/* Styles for primary and danger buttons */
 .btn-primary,
 .btn-danger {
   border-radius: 5px;
@@ -104,6 +110,7 @@ body {
 }
 
 /* --- FORM STYLES --- */
+/* Styles for forms */
 form {
   max-width: 600px;
   margin: 20px auto;
@@ -132,16 +139,19 @@ input[type="submit"] {
 }
 
 /* --- CONTAINER STYLES --- */
+/* General container styles */
 .container {
   padding: 20px;
 }
 
 /* --- HEADINGS STYLES --- */
+/* Styles for headings */
 h1, h2, h3, h4, h5, h6 {
   color: #000000b4;
 }
 
 /* --- FLASH MESSAGE STYLES --- */
+/* Styles for flash messages */
 .alert {
   margin-top: 20px;
   padding: 15px;
@@ -163,6 +173,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- MAIN HEADER STYLES --- */
+/* Styles for the main header */
 header h1 {
   font-weight: bold;
   color: #ffffff;
@@ -170,12 +181,14 @@ header h1 {
 }
 
 /* --- EVENT CARD CONTAINER --- */
+/* Container for event cards */
 .card-container {
   display: flex;
   flex-wrap: wrap;
 }
 
 /* --- EVENT CARD STYLES --- */
+/* Styles for event cards */
 .card {
   transition: transform 0.2s;
   border: 1px solid #e9ecef;
@@ -208,6 +221,7 @@ header h1 {
 }
 
 /* --- EVENT CARD BUTTON STYLES --- */
+/* Styles for buttons inside event cards */
 .btn-primary {
   background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
   border: none;
@@ -220,6 +234,7 @@ header h1 {
 }
 
 /* --- NAVBAR LINK STYLES --- */
+/* Styles for navbar links */
 .navbar-dark .navbar-nav .nav-link {
   color: #ffffff;
 }
@@ -227,4 +242,49 @@ header h1 {
 /* Navbar link hover effect */
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #f8f9fa;
+}
+
+/* --- YEAR AND MONTH MENU STYLES --- */
+/* Styles for year and month menus */
+.year-menu ul,
+.month-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.year-item {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+.month-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.month-menu li {
+  display: block;
+}
+
+.month-menu a {
+  text-decoration: none;
+  color: #007bff;
+  padding: 5px 10px;
+  display: block;
+}
+
+.month-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+/* --- FACEBOOK LOGO STYLES --- */
+/* Styles for the Facebook logo */
+.facebook-logo {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
 }

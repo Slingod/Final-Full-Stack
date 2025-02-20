@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
+  get "pages/contact"
   root 'events#index'
 
-  # Routes pour les événements avec l'inscription et la désinscription
+  # Routes for events with registration and unregistration
   resources :events do
     member do
-      post 'register'  # pour s'inscrire
-      delete 'unregister'  # pour se désinscrire
-      delete 'cancel'  # pour annuler un événement
+      post 'register'  # to register
+      delete 'unregister'  # to unregister
+      delete 'cancel'  # to cancel an event
     end
   end
 
-  # Routes pour les utilisateurs (inscription, connexion, etc.)
+  # Routes for users (signup, login, etc.)
   resources :users, only: [:show, :new, :create, :edit, :update, :index]
 
-  # Routes pour la connexion et la déconnexion
+  # Routes for login and logout
   get 'signup', to: 'users#new', as: 'signup'
   post 'signup', to: 'users#create'
 
@@ -21,10 +22,13 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
-  # Routes pour la gestion des mots de passe (si utilisée)
+  # Routes for password management (if used)
   resources :passwords, only: [:new, :create, :edit, :update], param: :token
 
-  # Routes pour PWA (si utilisée)
+  # Routes for PWA (if used)
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # Route for contact page
+  get 'contact', to: 'pages#contact'
 end

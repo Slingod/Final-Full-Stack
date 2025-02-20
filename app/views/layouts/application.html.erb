@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <title><%= content_for(:title) || "New era of Lissoise" %></title>
+  <title><%= content_for(:title) || "New era Lissoise" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%# PWA manifest pour installation sur mobile %>
+  <%# PWA manifest for mobile installation %>
   <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
   <link rel="icon" href="/icon.png" type="image/png">
@@ -27,39 +27,37 @@
   </header>
 
   <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <span class="navbar-text text-white mx-2">Bonjour <%= current_user.first_name %> 👋</span>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger" %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <span class="navbar-text text-white mx-2">Welcome to New era of Lissoise! ​​Log in to join an event</span>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Register", signup_path, class: "btn btn-success mx-2" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", login_path, class: "btn btn-info mx-2" %>
-          </li>
-        <% end %>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <span class="navbar-text text-white mx-2">Welcome back <%= current_user.first_name %> 👋</span>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger mx-2" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <span class="navbar-text text-white mx-2">Welcome to New era Lissoise! Log in to join an event</span>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Register", signup_path, class: "btn btn-success mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Login", login_path, class: "btn btn-info mx-2" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-
-  <!-- Contenu principal -->
+  <!-- Main Content -->
   <div class="container mt-4">
     <%= yield %>
   </div>
@@ -67,7 +65,7 @@
   <!-- Footer -->
   <footer class="footer bg-dark text-white text-center py-3">
     <div class="container">
-      <p class="mb-0">© <%= Time.now.year %> New era of Lissoise - All rights reserved</p>
+      <p class="mb-0">© <%= Time.now.year %> New era Lissoise - All rights reserved</p>
     </div>
   </footer>
 </body>

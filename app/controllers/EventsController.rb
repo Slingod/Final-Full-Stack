@@ -6,6 +6,14 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+
+    if params[:year].present?
+      @events = @events.where(year: params[:year])
+    end
+
+    if params[:month].present?
+      @events = @events.where(month: params[:month])
+    end
   end
 
   def show
@@ -18,7 +26,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
-      redirect_to @event, notice: "Événement créé avec succès."
+      redirect_to @event, notice: "Event created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +37,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: "Événement mis à jour avec succès."
+      redirect_to @event, notice: "Event updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,26 +45,25 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_path, notice: "Événement supprimé."
+    redirect_to events_path, notice: "Event deleted."
   end
-  
 
   def register
     unless @event.attendees.include?(current_user)
       @event.event_attendances.create(user: current_user)
     end
-    redirect_to event_path(@event), notice: 'Inscription réussie.'
+    redirect_to event_path(@event), notice: 'Registration successful.'
   end
 
   def unregister
     attendance = @event.event_attendances.find_by(user: current_user)
     attendance.destroy if attendance
-    redirect_to event_path(@event), notice: 'Désinscription réussie.'
+    redirect_to event_path(@event), notice: 'Unregistration successful.'
   end
 
   def cancel
     @event.update(status: 'canceled')
-    redirect_to events_path, notice: 'Événement annulé.'
+    redirect_to events_path, notice: 'Event canceled.'
   end
 
   private
@@ -64,25 +71,37 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "Événement non trouvé."
+    flash[:alert] = "Event not found."
     redirect_to events_path
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_date, :duration, :location, :price)
+    params.require(:event).permit(
+      :title,
+      :description,
+      :year,
+      :month,
+      :day,
+      :hour,
+      :minute,
+      :duration_minutes,
+      :price,
+      :location
+    )
   end
+  
 
   def authenticate_user!
-    redirect_to login_path, alert: "Vous devez être connecté." unless user_signed_in?
+    redirect_to login_path, alert: "You must be logged in." unless user_signed_in?
   end
 
   def authorize_admin
-    redirect_to root_path, alert: "Accès refusé" unless current_user&.admin?
+    redirect_to root_path, alert: "Access denied" unless current_user&.admin?
   end
 
   def authorize_destroy
     unless current_user&.admin? || current_user == @event.user
-      redirect_to root_path, alert: "Accès refusé"
+      redirect_to root_path, alert: "Access denied"
     end
   end
 end

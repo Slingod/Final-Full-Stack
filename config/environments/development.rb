@@ -1,18 +1,18 @@
 Rails.application.configure do
-  # Paramètres spécifiés ici auront la priorité sur ceux dans config/application.rb.
+  # Settings specified here will take precedence over those in config/application.rb.
 
-  # Dans l'environnement de développement, le code de votre application est rechargé à chaque requête.
-  # Cela ralentit le temps de réponse mais est parfait pour le développement
-  # car vous n'avez pas besoin de redémarrer le serveur web lorsque vous modifiez le code.
+  # In the development environment, your application's code is reloaded on every request.
+  # This slows down response time but is perfect for development
+  # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  # Ne pas charger le code au démarrage.
+  # Do not eager load code on boot.
   config.eager_load = false
 
-  # Afficher les rapports d'erreurs complets.
+  # Show full error reports.
   config.consider_all_requests_local = true
 
-  # Activer/désactiver la mise en cache. Par défaut, la mise en cache est désactivée.
+  # Enable/disable caching. By default, caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
@@ -26,32 +26,32 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Ne pas se soucier si le mailer ne peut pas envoyer.
+  # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
-  # Configurer l'hôte par défaut pour les URL générées
+  # Set the default host for URL generation
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # Imprimer les avis de dépréciation dans le journal Rails.
+  # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Lever une erreur au chargement de la page s'il y a des migrations en attente.
+  # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  # Le mode debug désactive la concaténation et le prétraitement des assets.
-  # Cette option peut provoquer des délais importants dans le rendu des vues avec un grand
-  # nombre d'assets complexes.
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in rendering views with a large
+  # number of complex assets.
   config.assets.debug = true
 
-  # Supprimer la sortie du logger pour les requêtes d'assets.
+  # Suppress logging of asset requests.
   config.assets.quiet = true
 
-  # Lever une erreur pour les traductions manquantes.
+  # Raise an error on missing translations.
   # config.action_view.raise_on_missing_translations = true
 
-  # Utiliser un observateur de fichiers événementiel pour détecter de manière asynchrone les changements dans le code source,
-  # les routes, les locales, etc. Cette fonctionnalité dépend de la gem listen.
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

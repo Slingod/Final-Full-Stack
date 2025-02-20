@@ -2,14 +2,14 @@ class StaticPagesController < ApplicationController
     before_action :authenticate_user!, except: [:index]
   
     def index
-      # Cette méthode affiche la page d'accueil.
-      # Assurez-vous qu'il n'y a pas de redirection ici qui pourrait causer une boucle.
+      # This method displays the home page.
+      # Make sure there are no redirects here that could cause a loop.
       @events = Event.all
     end
   
     def secret
-      # Cette méthode est protégée par authentification.
-      # Assurez-vous qu'elle ne redirige pas vers elle-même.
+      # This method is protected by authentication.
+      # Make sure it doesn't redirect to itself.
     end
   
     private

@@ -8,9 +8,9 @@ class PasswordsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user
       user.send_reset_password_instructions
-      redirect_to login_path, notice: "Un email de réinitialisation a été envoyé."
+      redirect_to login_path, notice: "A reset email has been sent."
     else
-      flash.now[:alert] = "Email introuvable."
+      flash.now[:alert] = "Email not found."
       render :new, status: :unprocessable_entity
     end
   end
@@ -20,7 +20,7 @@ class PasswordsController < ApplicationController
 
   def update
     if @user.update(password_params)
-      redirect_to login_path, notice: "Mot de passe mis à jour avec succès."
+      redirect_to login_path, notice: "Password updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class PasswordsController < ApplicationController
 
   def set_user_by_token
     @user = User.find_by(reset_password_token: params[:token])
-    redirect_to root_path, alert: "Lien invalide ou expiré." unless @user
+    redirect_to root_path, alert: "Invalid or expired link." unless @user
   end
 
   def password_params

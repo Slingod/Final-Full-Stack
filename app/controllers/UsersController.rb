@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     before_action :authorize_user!, only: %i[edit update]
   
     def index
-      @users = User.all  # Récupère tous les utilisateurs
+      @users = User.all  # Get all users
     end
   
     def show
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
         session[:user_id] = @user.id
-        redirect_to root_path, notice: "Compte créé avec succès !"
+        redirect_to root_path, notice: "Account created successfully !"
       else
         render :new, status: :unprocessable_entity
       end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   
     def update
       if @user.update(user_params)
-        redirect_to @user, notice: "Profil mis à jour."
+        redirect_to @user, notice: "Profile updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -46,11 +46,11 @@ class UsersController < ApplicationController
     end
   
     def authenticate_user!
-      redirect_to login_path, alert: "Vous devez être connecté." unless logged_in?
+      redirect_to login_path, alert: "You must be logged in." unless logged_in?
     end
   
     def authorize_user!
-      redirect_to root_path, alert: "Action non autorisée." unless @user.id == session[:user_id]
+      redirect_to root_path, alert: "Unauthorized action." unless @user.id == session[:user_id]
     end
   end
   
