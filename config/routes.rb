@@ -31,4 +31,5 @@ Rails.application.routes.draw do
 
   # Route for contact page
   get 'contact', to: 'pages#contact'
+  post 'contact', to: 'pages#submit_contact'
 end
