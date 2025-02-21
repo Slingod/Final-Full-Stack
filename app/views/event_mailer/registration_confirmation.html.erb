@@ -1,0 +1,8 @@
+<%= image_tag 'Nouvelle Ere Lissoise Logo.jpg', alt: 'Nouvelle Ere Lissoise', style: 'width: 200px; height: auto;' %>
+
+<h1>Hello <%= @user.name %>,</h1>
+
+<p>You are successfully registered for the event: <strong><%= @event.title %></strong>.</p>
+<p>Date: <%= @event.date.strftime('%d/%m/%Y à %Hh%M') %></p>
+
+<p>Thank you and see you soon!</p>

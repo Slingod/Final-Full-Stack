@@ -34,6 +34,21 @@ Rails.application.configure do
   # Set the default host for URL generation
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  # Set asset host for emails (needed to display images in emails)
+  config.action_mailer.asset_host = 'http://localhost:3000'
+
+  # Configure SMTP settings for email sending
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "localhost",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["EMAIL_USERNAME"], # Stocke dans une variable d'environnement
+    password: ENV["EMAIL_PASSWORD"]  # Stocke dans une variable d'environnement
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

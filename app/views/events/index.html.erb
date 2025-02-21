@@ -83,9 +83,7 @@
   <!-- Display events based on selected year and month -->
   <div class="events">
   <% @events.each do |event| %>
-    <div class="event">
-      <h2><%= event.title %></h2>
-      <p><%= event.description %></p>
+       
       <!-- Display photos if available -->
       <% if event.photos.any? %>
         <div class="photos">

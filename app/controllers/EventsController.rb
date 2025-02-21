@@ -51,8 +51,9 @@ class EventsController < ApplicationController
   def register
     unless @event.attendees.include?(current_user)
       @event.event_attendances.create(user: current_user)
+      EventMailer.registration_confirmation(current_user, @event).deliver_later
     end
-    redirect_to event_path(@event), notice: 'Registration successful.'
+    redirect_to event_path(@event), notice: 'Registration successful. A confirmation email has been sent.'
   end
 
   def unregister
@@ -89,7 +90,6 @@ class EventsController < ApplicationController
       :location
     )
   end
-  
 
   def authenticate_user!
     redirect_to login_path, alert: "You must be logged in." unless user_signed_in?
