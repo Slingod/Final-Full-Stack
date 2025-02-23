@@ -12,6 +12,7 @@ class PagesController < ApplicationController
     message = params[:message]
 
     # Add code here to process the form data, e.g., save to the database or send an email
+    EventMailer.contact_email(name, email, message).deliver_now
 
     # Redirect to the contact page with a success message
     redirect_to contact_path, notice: 'Message sent successfully!'

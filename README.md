@@ -83,7 +83,7 @@ Here's a checklist based on the provided criteria to verify what is already in p
 - [✅] Table names are product-oriented.
   Table names like users and events are meaningful.
 
-- [❌] Presence of a mailer.
+- [🔄] Presence of a mailer.
   Mailer functionality needs to be implemented.
 
 - [✅] Clean routes and use of nested resources.
@@ -115,7 +115,7 @@ Here's a checklist based on the provided criteria to verify what is already in p
 - [✅] Branching authentication system.
   Authentication system is in place.
 
-- [❌] Functional mailer in production.
+- [🔄] Functional mailer in production.
   Mailer functionality needs to be implemented.
 
 - [❌] Use of an external API.

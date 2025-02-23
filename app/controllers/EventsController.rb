@@ -6,18 +6,11 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-
-    if params[:year].present?
-      @events = @events.where(year: params[:year])
-    end
-
-    if params[:month].present?
-      @events = @events.where(month: params[:month])
-    end
+    @events = @events.where(year: params[:year]) if params[:year].present?
+    @events = @events.where(month: params[:month]) if params[:month].present?
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @event = Event.new
@@ -32,8 +25,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @event.update(event_params)
@@ -80,12 +72,8 @@ class EventsController < ApplicationController
     params.require(:event).permit(
       :title,
       :description,
-      :year,
-      :month,
-      :day,
-      :hour,
-      :minute,
-      :duration_minutes,
+      :start_date,
+      :duration,
       :price,
       :location
     )
@@ -100,8 +88,6 @@ class EventsController < ApplicationController
   end
 
   def authorize_destroy
-    unless current_user&.admin? || current_user == @event.user
-      redirect_to root_path, alert: "Access denied"
-    end
+    redirect_to root_path, alert: "Access denied" unless current_user&.admin? || current_user == @event.user
   end
 end
