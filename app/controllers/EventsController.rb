@@ -10,7 +10,15 @@ class EventsController < ApplicationController
     @events = @events.where(month: params[:month]) if params[:month].present?
   end
 
-  def show; end
+  def show
+    if params[:year].present? && params[:month].present?
+      @photos = @event.photos.by_year_and_month(params[:year], params[:month])
+      @videos = @event.videos.by_year_and_month(params[:year], params[:month])
+    else
+      @photos = @event.photos
+      @videos = @event.videos
+    end
+  end
 
   def new
     @event = Event.new

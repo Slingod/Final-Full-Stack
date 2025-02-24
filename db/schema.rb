@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_20_163804) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_23_112708) do
   create_table "event_attendances", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "user_id", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_20_163804) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date_taken"
     t.index ["event_id"], name: "index_photos_on_event_id"
   end
 
