@@ -4,11 +4,11 @@
   <p><strong>Start date :</strong> <%= @event.start_date %></p>
   <p><strong>Duration :</strong> <%= @event.duration %> minutes</p>
   <p><strong>Price :</strong> <%= @event.price %> €</p>
-  <p><strong>Location :</strong> <%= @event.location %></p>
-  <p><strong>Created by :</strong> <%= @event.user.email %></p>
-  <p><strong>Number of registrants :</strong> <%= @event.attendees.count %></p>
+<p><strong>Location :</strong> <%= @event.location %></p>
+<p class="card-text"><strong>Created by:</strong> <%= @event.user.first_name %> <%= @event.user.last_name %></p>
+<p><strong>Number of registrants :</strong> <%= @event.attendees.count %></p>
 
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
     <% if @event.attendees.include?(current_user) %>
       <%= button_to 'Unsubscribe', unregister_event_path(@event), method: :delete, class: "btn btn-primary" %>
     <% else %>

@@ -1,8 +1,9 @@
 @import "bootstrap";
-
 /*
  *= require_self
  *= require_tree .
+ *= require app
+ *= <%= stylesheet_link_tag 'app', media: 'all', 'data-turbo-track': 'reload' %>
  */
 
 /* ==========================================================================
@@ -37,47 +38,72 @@ html, body {
 
 /* Styles for the navigation bar */
 .navbar {
-  background-color: #3f6e609d; /* Semi-transparent background color */
+  background-color: rgba(63, 110, 96, 0.6); /* Semi-transparent background color */
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Space between brand and nav items */
+  align-items: center; /* Center items vertically */
 }
 
 /* Styles for the navbar brand and links */
 .navbar-brand,
 .navbar-nav .nav-link {
   color: #ffffff;
+  font-size: 16px;
 }
 
-/* Change link color on hover */
 .navbar-nav .nav-link:hover {
   color: #f8f9fa;
 }
 
-/* Style for buttons inside the navbar */
+/* Align navbar items to the center */
+.navbar .navbar-collapse {
+  justify-content: center;
+}
+
+/* Ensure navbar items are aligned properly */
+.navbar .navbar-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 50px; /* Adds spacing between items */
+}
+
+/* Navbar buttons styling */
 .navbar .btn {
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 5px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-/* Removes default list styles from navbar links */
-.navbar .navbar-nav {
-  list-style: none; /* Removes default list styles */
-  padding-left: 0;
+/* Remove underline from links and buttons */
+.navbar-link,
+.btn-primary,
+.btn-danger,
+.card .btn {
+  text-decoration: none;
 }
 
-.navbar .navbar-nav li {
-  display: inline-block;
+.navbar-link:hover,
+.btn-primary:hover,
+.btn-danger:hover,
+.card .btn:hover {
+  text-decoration: none;
 }
 
-/* Styles for navbar links */
-.navbar-dark .navbar-nav .nav-link {
-  color: #ffffff;
+/* Additional spacing for specific nav items */
+.navbar-nav .nav-item:last-child,
+.navbar-nav .nav-item:nth-last-child(2) {
+  margin-left: 30px; /* Add extra space to the left for these items */
 }
 
-/* Navbar link hover effect */
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: #f8f9fa;
+/* Style for the brand */
+.navbar-brand {
+  flex: 1; /* Allow the brand to take available space */
+  text-align: left; /* Align brand text to the left */
 }
 
 /* ==========================================================================
@@ -87,13 +113,55 @@ html, body {
 /* Footer always stays at the bottom */
 .footer {
   margin-top: auto;
+  padding: 10px 0;
+  background-color: rgba(63, 110, 96, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text */
 }
+
+/* Style for footer buttons container */
+.footer .btn-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+/* Style for footer buttons */
+.footer .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff; /* Blue background for buttons */
+  border: none;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+/* Add margin to the right of the first button to create space */
+.footer .btn-container .btn:first-child {
+  margin-right: 30px; /* Increase space between the buttons */
+}
+
+.footer .btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Style for the Facebook logo inside the button */
+.footer .facebook-logo {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+
+
 
 /* ==========================================================================
    Button Styles
    ========================================================================== */
 
-/* Styles for primary and danger buttons */
 .btn-primary,
 .btn-danger {
   border-radius: 5px;
@@ -102,9 +170,9 @@ html, body {
   background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
   border: none;
   color: #ffffff;
+  transition: background-image 0.3s ease;
 }
 
-/* Hover effect for primary and danger buttons */
 .btn-primary:hover,
 .btn-danger:hover {
   background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
@@ -114,18 +182,16 @@ html, body {
    Form Styles
    ========================================================================== */
 
-/* Styles for forms */
+/* Forms and inputs */
 form {
   max-width: 600px;
   margin: 20px auto;
 }
 
-/* Style for form labels */
 label {
   font-weight: bold;
 }
 
-/* Input field styling */
 input,
 textarea,
 select {
@@ -136,7 +202,6 @@ select {
   border-radius: 5px;
 }
 
-/* Style for submit button */
 input[type="submit"] {
   width: auto;
   cursor: pointer;
@@ -146,17 +211,39 @@ input[type="submit"] {
    Headings Styles
    ========================================================================== */
 
-/* Styles for headings */
-h1, h2, h3, h4, h5, h6 {
-  color: #000000b4;
+/* Header Styles */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
 }
 
-/* Styles for the main header */
-header h1 {
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+/* Style for the logo image */
+.header-logo {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
 }
+
+/* Style for the navbar */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the navbar content */
+  align-items: center; /* Center items vertically */
+}
+
+.navbar-collapse {
+  flex-grow: 1; /* Allow the collapse element to grow and center its content */
+  display: flex;
+  justify-content: center; /* Center the nav items */
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 10px; /* Add space between nav items */
+}
+
 
 /* ==========================================================================
    Flash Message Styles
@@ -190,18 +277,21 @@ header h1 {
 /* Container for event cards */
 .card-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allows wrapping to the next row */
+  justify-content: space-between; /* Distributes space between cards */
+  gap: 20px; /* Adds space between cards */
 }
 
 /* Styles for event cards */
 .card {
+  flex: 1 1 calc(20% - 20px); /* 5 cards per row with spacing */
+  max-width: calc(20% - 20px); /* Ensures max width per card */
   transition: transform 0.2s;
   border: 1px solid #e9ecef;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   color: #343a40;
-  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -214,44 +304,26 @@ header h1 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Event card title */
-.card-title {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+/* Responsive behavior */
+@media (max-width: 1200px) {
+  .card {
+    flex: 1 1 calc(33.33% - 20px); /* 3 cards per row on smaller screens */
+    max-width: calc(33.33% - 20px);
+  }
 }
 
-/* Event card text */
-.card-text {
-  color: #6c757d;
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row on tablets */
+    max-width: calc(50% - 20px);
+  }
 }
 
-/* Ensures card elements are displayed correctly */
-.card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensures card body elements are aligned correctly */
-.card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensures buttons inside cards are properly spaced */
-.card .btn {
-  margin: 5px;
-}
-
-/* Styles for buttons inside event cards */
-.btn-primary {
-  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
-  border: none;
-  color: #ffffff;
-}
-
-/* Hover effect for primary button */
-.btn-primary:hover {
-  background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%; /* 1 card per row on small screens */
+    max-width: 100%;
+  }
 }
 
 /* ==========================================================================
@@ -259,9 +331,10 @@ header h1 {
    ========================================================================== */
 
 /* Styles for year and month menus */
-.year-menu ul,
-.month-menu ul {
-  list-style-type: none;
+.year-menu ul {
+  display: flex;
+  justify-content: center; /* Centers the items */
+  gap: 250px; /* Spreads the buttons */
   padding: 0;
 }
 
@@ -303,4 +376,31 @@ header h1 {
   height: 20px;
   vertical-align: middle;
   margin-right: 5px;
+}
+
+
+/* Header Styles */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the navbar content */
+  align-items: center; /* Center items vertically */
+}
+
+.navbar-collapse {
+  flex-grow: 1; /* Allow the collapse element to grow and center its content */
+  display: flex;
+  justify-content: center; /* Center the nav items */
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 10px; /* Add space between nav items */
 }
