@@ -5,6 +5,10 @@
  *= require_tree .
  */
 
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
+
 /* Global style for the page body */
 body {
   font-family: 'Arial', sans-serif;
@@ -12,9 +16,25 @@ body {
   color: #ffffff;
   margin: 0;
   padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* --- NAVIGATION BAR STYLES --- */
+html, body {
+  height: 100%;
+}
+
+/* General container styles */
+.container {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ==========================================================================
+   Navigation Bar Styles
+   ========================================================================== */
+
 /* Styles for the navigation bar */
 .navbar {
   background-color: #3f6e609d; /* Semi-transparent background color */
@@ -40,47 +60,6 @@ body {
   font-weight: bold;
 }
 
-/* --- ENSURE THE FOOTER STAYS AT THE BOTTOM --- */
-/* Ensures the footer stays at the bottom of the page */
-html, body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensures the container takes the remaining space */
-.container {
-  flex: 1;
-}
-
-/* Footer always stays at the bottom */
-.footer {
-  margin-top: auto;
-}
-
-/* --- FIX EVENT CARDS STYLES --- */
-/* Ensures card elements are displayed correctly */
-.card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensures card body elements are aligned correctly */
-.card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* --- ALIGN BUTTONS INSIDE CARDS --- */
-/* Ensures buttons inside cards are properly spaced */
-.card .btn {
-  margin: 5px;
-}
-
-/* --- FIX NAVBAR BULLET POINT ISSUE --- */
 /* Removes default list styles from navbar links */
 .navbar .navbar-nav {
   list-style: none; /* Removes default list styles */
@@ -91,7 +70,29 @@ body {
   display: inline-block;
 }
 
-/* --- BUTTON STYLES --- */
+/* Styles for navbar links */
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+/* Navbar link hover effect */
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #f8f9fa;
+}
+
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
+
+/* Footer always stays at the bottom */
+.footer {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
 /* Styles for primary and danger buttons */
 .btn-primary,
 .btn-danger {
@@ -109,7 +110,10 @@ body {
   background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
 }
 
-/* --- FORM STYLES --- */
+/* ==========================================================================
+   Form Styles
+   ========================================================================== */
+
 /* Styles for forms */
 form {
   max-width: 600px;
@@ -138,19 +142,26 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* --- CONTAINER STYLES --- */
-/* General container styles */
-.container {
-  padding: 20px;
-}
+/* ==========================================================================
+   Headings Styles
+   ========================================================================== */
 
-/* --- HEADINGS STYLES --- */
 /* Styles for headings */
 h1, h2, h3, h4, h5, h6 {
   color: #000000b4;
 }
 
-/* --- FLASH MESSAGE STYLES --- */
+/* Styles for the main header */
+header h1 {
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Flash Message Styles
+   ========================================================================== */
+
 /* Styles for flash messages */
 .alert {
   margin-top: 20px;
@@ -172,22 +183,16 @@ h1, h2, h3, h4, h5, h6 {
   color: #721c24;
 }
 
-/* --- MAIN HEADER STYLES --- */
-/* Styles for the main header */
-header h1 {
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
+/* ==========================================================================
+   Event Card Styles
+   ========================================================================== */
 
-/* --- EVENT CARD CONTAINER --- */
 /* Container for event cards */
 .card-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-/* --- EVENT CARD STYLES --- */
 /* Styles for event cards */
 .card {
   transition: transform 0.2s;
@@ -220,7 +225,23 @@ header h1 {
   color: #6c757d;
 }
 
-/* --- EVENT CARD BUTTON STYLES --- */
+/* Ensures card elements are displayed correctly */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensures card body elements are aligned correctly */
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensures buttons inside cards are properly spaced */
+.card .btn {
+  margin: 5px;
+}
+
 /* Styles for buttons inside event cards */
 .btn-primary {
   background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
@@ -233,18 +254,10 @@ header h1 {
   background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
 }
 
-/* --- NAVBAR LINK STYLES --- */
-/* Styles for navbar links */
-.navbar-dark .navbar-nav .nav-link {
-  color: #ffffff;
-}
+/* ==========================================================================
+   Year and Month Menu Styles
+   ========================================================================== */
 
-/* Navbar link hover effect */
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: #f8f9fa;
-}
-
-/* --- YEAR AND MONTH MENU STYLES --- */
 /* Styles for year and month menus */
 .year-menu ul,
 .month-menu ul {
@@ -280,7 +293,10 @@ header h1 {
   background-color: #f0f0f0;
 }
 
-/* --- FACEBOOK LOGO STYLES --- */
+/* ==========================================================================
+   Facebook Logo Styles
+   ========================================================================== */
+
 /* Styles for the Facebook logo */
 .facebook-logo {
   width: 20px;

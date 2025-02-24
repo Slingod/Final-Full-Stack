@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_23_112708) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_24_071655) do
   create_table "event_attendances", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "user_id", null: false
@@ -89,6 +89,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_23_112708) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "url"
+    t.datetime "date_taken"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_videos_on_event_id"
+  end
+
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "users"
   add_foreign_key "event_registrations", "events"
@@ -98,4 +107,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_23_112708) do
   add_foreign_key "events", "users"
   add_foreign_key "photos", "events"
   add_foreign_key "sessions", "users"
+  add_foreign_key "videos", "events"
 end
