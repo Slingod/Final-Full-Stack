@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create register unregister cancel]
   before_action :set_event, only: %i[show edit update destroy register unregister cancel]
-  before_action :authorize_admin, only: %i[edit update]
-  before_action :authorize_destroy, only: [:destroy]
+  before_action :authorize_event_modification, only: %i[edit update destroy]
+  before_action :authorize_organizer, only: %i[new create]
 
   def index
     @events = Event.all
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_path, notice: "Event deleted."
+    redirect_to events_path, notice: "Event deleted successfully."
   end
 
   def register
@@ -91,11 +91,13 @@ class EventsController < ApplicationController
     redirect_to login_path, alert: "You must be logged in." unless user_signed_in?
   end
 
-  def authorize_admin
-    redirect_to root_path, alert: "Access denied" unless current_user&.admin?
+  def authorize_event_modification
+    unless current_user&.admin? || current_user&.organizer? || @event.user == current_user
+      redirect_to root_path, alert: "Access denied. You do not have permission to modify this event."
+    end
   end
 
-  def authorize_destroy
-    redirect_to root_path, alert: "Access denied" unless current_user&.admin? || current_user == @event.user
+  def authorize_organizer
+    redirect_to events_path, alert: "You are not authorized to create events." unless current_user&.organizer? || current_user&.admin?
   end
 end

@@ -1,8 +1,19 @@
-<h1>List of Users</h1>
-
-<% @users.each do |user| %>
-  <p>
-    <strong>Email:</strong> <%= user.email %> |
-    <%= link_to 'Edit', edit_user_path(user) %>
-  </p>
-<% end %>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Our Members</h2>
+  <div class="card-container">
+    <% @users.each do |user| %>
+      <div class="card">
+        <div class="card-body">
+          <% if user.profile_picture.attached? %>
+            <img src="<%= url_for(user.profile_picture) %>" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+          <% else %>
+            <img src="/assets/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+          <% end %>
+          <h5 class="card-title"><%= user.first_name %> <%= user.last_name %></h5>
+          <p class="card-text"><strong>Email:</strong> <%= user.email %></p>
+          <p class="card-text"><%= user.bio if user.respond_to?(:bio) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

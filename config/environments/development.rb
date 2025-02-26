@@ -45,8 +45,8 @@ Rails.application.configure do
     domain: "localhost",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["EMAIL_USERNAME"], # Stocke dans une variable d'environnement
-    password: ENV["EMAIL_PASSWORD"]  # Stocke dans une variable d'environnement
+    user_name: ENV["EMAIL_USERNAME"], # Stored in an environment variable
+    password: ENV["EMAIL_PASSWORD"]  # Stored in an environment variable
   }
 
   # Print deprecation notices to the Rails logger.
@@ -69,4 +69,7 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Active Storage configuration
+  config.active_storage.service = :local
 end

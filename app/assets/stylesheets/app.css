@@ -121,9 +121,11 @@ html, body {
   text-align: center; /* Center text */
 }
 
-/* Style for footer buttons container */
+/* Footer button container */
 .footer .btn-container {
   display: flex;
+  justify-content: center; /* Center all buttons */
+  gap: 40px; /* Increase spacing between buttons */
   margin-bottom: 10px;
 }
 
@@ -138,9 +140,9 @@ html, body {
   transition: background-color 0.3s ease;
 }
 
-/* Add margin to the right of the first button to create space */
+/* Remove margin-right from first child (not needed anymore) */
 .footer .btn-container .btn:first-child {
-  margin-right: 30px; /* Increase space between the buttons */
+  margin-right: 0;
 }
 
 .footer .btn:hover {
@@ -271,10 +273,10 @@ input[type="submit"] {
 }
 
 /* ==========================================================================
-   Event Card Styles
+   Card Styles
    ========================================================================== */
 
-/* Container for event cards */
+/* Container for cards */
 .card-container {
   display: flex;
   flex-wrap: wrap; /* Allows wrapping to the next row */
@@ -282,11 +284,11 @@ input[type="submit"] {
   gap: 20px; /* Adds space between cards */
 }
 
-/* Styles for event cards */
+/* Styles for cards */
 .card {
   flex: 1 1 calc(20% - 20px); /* 5 cards per row with spacing */
   max-width: calc(20% - 20px); /* Ensures max width per card */
-  transition: transform 0.2s;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
   border: 1px solid #e9ecef;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -296,12 +298,18 @@ input[type="submit"] {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  overflow: hidden; /* Ensures content does not overflow */
 }
 
-/* Hover effect for event cards */
+/* Hover effect for cards */
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.05); /* Combines both hover effects */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for card body */
+.card-body {
+  padding: 20px;
 }
 
 /* Responsive behavior */
@@ -325,6 +333,7 @@ input[type="submit"] {
     max-width: 100%;
   }
 }
+
 
 /* ==========================================================================
    Year and Month Menu Styles

@@ -1,35 +1,39 @@
 Rails.application.routes.draw do
-  get "pages/contact"
+  # Static pages
+  get 'privacy-policy', to: 'static#privacy_policy', as: :privacy_policy
+  get 'members', to: 'static#members', as: :members
+
+  # Contact page
+  get 'pages/contact'
+  get 'contact', to: 'pages#contact'
+  post 'contact', to: 'pages#submit_contact'
+
+  # Homepage
   root 'events#index'
 
-  # Routes for events with registration and unregistration
+  # Event routes
   resources :events do
     member do
-      post 'register'  # to register
-      delete 'unregister'  # to unregister
-      delete 'cancel'  # to cancel an event
+      post 'register'
+      delete 'unregister'
+      delete 'cancel'
     end
   end
 
-  # Routes for users (signup, login, etc.)
-  resources :users, only: [:show, :new, :create, :edit, :update, :index]
+  # User routes
+  resources :users, only: [:show, :new, :create, :edit, :update, :index, :destroy]
 
-  # Routes for login and logout
+  # Authentication
   get 'signup', to: 'users#new', as: 'signup'
   post 'signup', to: 'users#create'
-
   get 'login', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy', as: 'logout'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  # Routes for password management (if used)
+  # Password management
   resources :passwords, only: [:new, :create, :edit, :update], param: :token
 
-  # Routes for PWA (if used)
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Route for contact page
-  get 'contact', to: 'pages#contact'
-  post 'contact', to: 'pages#submit_contact'
+  # PWA routes
+  get 'manifest' => 'rails/pwa#manifest', as: :pwa_manifest
+  get 'service-worker' => 'rails/pwa#service_worker', as: :pwa_service_worker
 end

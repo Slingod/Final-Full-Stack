@@ -9,13 +9,14 @@
     <ul>
       <% [2023, 2024, 2025, 2026].each do |year| %>
         <li class="year-item" onmouseover="showMonths('<%= year %>')" onmouseout="hideMonths('<%= year %>')">
-        <button class="btn btn-primary">
-        <%= year %>
-          <ul class="month-menu" id="months-<%= year %>" style="display: none;">
-            <% (1..12).each do |month| %>
-              <li><a href="/events?year=<%= year %>&month=<%= month %>"><%= Date::MONTHNAMES[month] %></a></li>
-            <% end %>
-          </ul>
+          <button class="btn btn-primary">
+            <%= year %>
+            <ul class="month-menu" id="months-<%= year %>" style="display: none;">
+              <% (1..12).each do |month| %>
+                <li><a href="/events?year=<%= year %>&month=<%= month %>"><%= Date::MONTHNAMES[month] %></a></li>
+              <% end %>
+            </ul>
+          </button>
         </li>
       <% end %>
     </ul>
@@ -41,7 +42,7 @@
           <p class="card-text"><strong>Location:</strong> <%= event.location %></p>
           <p class="card-text"><strong>Created by:</strong> <%= event.user.first_name %> <%= event.user.last_name %></p>
           <p class="card-text"><strong>Number of registrants:</strong> <%= event.attendees.count %></p>
-          
+
           <!-- Display photos if available -->
           <% if event.photos.any? %>
             <div class="photos">
@@ -53,9 +54,10 @@
 
           <div class="mt-auto">
             <%= link_to 'Show more', event_path(event), class: "btn btn-primary" %>
-            <% if current_user&.admin? %>
-              <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-            <% end %>
+            <!-- Comment this section temporarily -->
+            <%# if current_user&.admin? %>
+              <%#= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <%# end %>
           </div>
         </div>
       </div>
