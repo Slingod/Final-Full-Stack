@@ -24,33 +24,39 @@
       
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav ms-auto d-flex">
-          <% if user_signed_in? %>
-            <li class="nav-item">
-              <span class="navbar-text text-white mx-2">Welcome back <%= current_user.first_name %> 👋</span>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Members", members_path, class: "btn btn-primary mx-2" %>
-            </li>
-            <li class="nav-item">
-              <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger mx-2" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <span class="navbar-text text-white mx-2">Welcome to New Era Lissoise! Log in to join an event</span>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Register", signup_path, class: "btn btn-primary mx-2" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Login", login_path, class: "btn btn-primary mx-2" %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+  <ul class="navbar-nav ms-auto d-flex">
+    <% if user_signed_in? %>
+      <li class="nav-item">
+        <span class="navbar-text text-white mx-2">Welcome back <%= current_user.first_name %> 👋</span>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Home", root_path, class: "btn btn-primary mx-2" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Members", members_path, class: "btn btn-primary mx-2" %>
+      </li>
+      <li class="nav-item">
+        <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger mx-2" %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <span class="navbar-text text-white mx-2">Welcome to New Era Lissoise! Log in to join an event</span>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Home", root_path, class: "btn btn-primary mx-2" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Register", signup_path, class: "btn btn-primary mx-2" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Login", login_path, class: "btn btn-primary mx-2" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
     </div>
   </nav>
 </header>

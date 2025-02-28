@@ -14,8 +14,9 @@ class User < ApplicationRecord
   ROLES = ["user", "admin", "organizer"]
 
   def admin?
-    role == "admin"
+    admin
   end
+  
 
   def organizer?
     role == "organizer"
