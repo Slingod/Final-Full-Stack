@@ -40,10 +40,15 @@ class EventsController < ApplicationController
   
     if @event.save
       if params[:event][:photos]
+        existing_filenames = @event.photos.map { |photo| photo.filename.to_s }
+  
         params[:event][:photos].each do |photo|
-          @event.photos.attach(photo)
+          unless existing_filenames.include?(photo.original_filename)
+            @event.photos.attach(photo)
+          end
         end
       end
+  
       redirect_to @event, notice: "Event successfully created!"
     else
       render :new, status: :unprocessable_entity
