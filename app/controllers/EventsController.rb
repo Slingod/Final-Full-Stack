@@ -5,20 +5,31 @@ class EventsController < ApplicationController
   before_action :authorize_organizer, only: %i[new create]
 
   def index
-    @events = Event.all
-    @events = @events.where(year: params[:year]) if params[:year].present?
-    @events = @events.where(month: params[:month]) if params[:month].present?
+    if params[:year].present? && params[:month].present?
+      year = params[:year].to_i
+      month = params[:month].to_i
+  
+      # Adaptation pour SQLite : utilisation de strftime pour extraire l'année et le mois
+      @events = Event.where("strftime('%Y', start_date) = ? AND strftime('%m', start_date) = ?", year.to_s, format('%02d', month))
+    else
+      @events = Event.all
+    end
   end
+  
 
   def show
     if params[:year].present? && params[:month].present?
-      @photos = @event.photos.by_year_and_month(params[:year], params[:month])
-      @videos = @event.videos.by_year_and_month(params[:year], params[:month])
+      @photos = @event.photos.select do |photo|
+        photo.created_at.year.to_s == params[:year] && photo.created_at.month.to_s == params[:month]
+      end
+      @videos = @event.videos.select do |video|
+        video.created_at.year.to_s == params[:year] && video.created_at.month.to_s == params[:month]
+      end
     else
       @photos = @event.photos
       @videos = @event.videos
     end
-  end
+  end  
 
   def new
     @event = Event.new
@@ -26,8 +37,14 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
+  
     if @event.save
-      redirect_to @event, notice: "Event created successfully."
+      if params[:event][:photos]
+        params[:event][:photos].each do |photo|
+          @event.photos.attach(photo)
+        end
+      end
+      redirect_to @event, notice: "Event successfully created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -77,14 +94,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(
-      :title,
-      :description,
-      :start_date,
-      :duration,
-      :price,
-      :location
-    )
+    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, photos: [])
   end
 
   def authenticate_user!

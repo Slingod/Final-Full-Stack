@@ -334,6 +334,27 @@ input[type="submit"] {
   }
 }
 
+.event-photo {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin: 5px;
+  display: block;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 photos per lines */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
 
 /* ==========================================================================
    Year and Month Menu Styles

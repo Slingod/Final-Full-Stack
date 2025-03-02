@@ -32,11 +32,11 @@
   <% end %>
 
   <h3>Photos</h3>
-  <div class="gallery">
-    <% @photos.each do |photo| %>
-      <img src="<%= photo.image_url %>" alt="Event photo" class="img-thumbnail">
-    <% end %>
-  </div>
+<div class="gallery">
+  <% @event.photos.each do |photo| %>
+    <%= image_tag photo, class: "event-photo" %>
+  <% end %>
+</div>
 
   <h3>Videos</h3>
   <div class="video-gallery">

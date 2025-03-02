@@ -1,6 +1,5 @@
 <!-- Custom Navbar -->
 <div class="navbar-custom">
-
 </div>
 
 <!-- Year and Month Filtering Menu -->
@@ -42,15 +41,6 @@
           <p class="card-text"><strong>Location:</strong> <%= event.location %></p>
           <p class="card-text"><strong>Created by:</strong> <%= event.user.first_name %> <%= event.user.last_name %></p>
           <p class="card-text"><strong>Number of registrants:</strong> <%= event.attendees.count %></p>
-
-          <!-- Display photos if available -->
-          <% if event.photos.any? %>
-            <div class="photos">
-              <% event.photos.each do |photo| %>
-                <img src="<%= asset_path(photo.image) %>" alt="Event Photo">
-              <% end %>
-            </div>
-          <% end %>
 
           <div class="mt-auto">
             <%= link_to 'Show more', event_path(event), class: "btn btn-primary" %>
