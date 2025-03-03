@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale %>">
 <head>
   <title><%= content_for(:title) || "New Era Lissoise" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,64 +21,73 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      
-
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-  <ul class="navbar-nav ms-auto d-flex">
-    <% if user_signed_in? %>
-      <li class="nav-item">
-        <span class="navbar-text text-white mx-2">Welcome back <%= current_user.first_name %> 👋</span>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Home", root_path, class: "btn btn-primary mx-2" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Create an Event", new_event_path, class: "btn btn-primary mx-2" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Members", members_path, class: "btn btn-primary mx-2" %>
-      </li>
-      <li class="nav-item">
-        <%= button_to "Log Out", logout_path, method: :delete, class: "btn btn-danger mx-2" %>
-      </li>
-    <% else %>
-      <li class="nav-item">
-        <span class="navbar-text text-white mx-2">Welcome to New Era Lissoise! Log in to join an event</span>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Home", root_path, class: "btn btn-primary mx-2" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Register", signup_path, class: "btn btn-primary mx-2" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Login", login_path, class: "btn btn-primary mx-2" %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+        <ul class="navbar-nav ms-auto d-flex">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <span class="navbar-text text-white mx-2"><%= t('navbar.welcome', name: current_user.first_name) %> 👋</span>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.home'), root_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.create_event'), new_event_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.members'), members_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= button_to t('navbar.logout'), logout_path, method: :delete, class: "btn btn-danger mx-2" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <span class="navbar-text text-white mx-2"><%= t('welcome_message') %></span>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.home'), root_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.register'), signup_path, class: "btn btn-primary mx-2" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t('navbar.login'), login_path, class: "btn btn-primary mx-2" %>
+            </li>
+          <% end %>
+
+          <!-- Selector of language -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= t('navbar.language') %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+              <li><%= link_to "🇫🇷 Français", switch_locale_path(locale: 'fr'), class: "dropdown-item" %></li>
+              <li><%= link_to "🇬🇧 English", switch_locale_path(locale: 'en'), class: "dropdown-item" %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>
 
-  <!-- Main Content -->
-  <div class="container mt-4">
-    <%= yield %>
-  </div>
+<!-- Main Content -->
+<div class="container mt-4">
+  <%= yield %>
+</div>
 
-    <!-- Footer -->
-  <footer class="footer bg-dark text-white py-3">
+<!-- Footer -->
+<footer class="footer bg-dark text-white py-3">
   <div class="container">
     <div class="btn-container">
-      <%= link_to "Contact us", contact_path, class: "btn btn-primary" %>
+      <%= link_to t('footer.contact_us'), contact_path, class: "btn btn-primary" %>
       <a href="https://www.facebook.com" target="_blank" class="btn btn-primary">
         <img src="/assets/facebook-logo.png" alt="Facebook Logo" class="facebook-logo me-2">
-        Join us on Facebook
+        <%= t('footer.join_facebook') %>
       </a>
-      <%= link_to "Privacy Policy", privacy_policy_path, class: "btn btn-primary" %>
+      <%= link_to t('footer.privacy_policy'), privacy_policy_path, class: "btn btn-primary" %>
     </div>
   </div>
-  <p class="text-center mt-3 mb-0">© <%= Time.now.year %> New Era Lissoise - All rights reserved</p>
+  <p class="text-center mt-3 mb-0">© <%= Time.now.year %> New Era Lissoise - <%= t('footer.copyright', year: Time.now.year) %></p>
 </footer>
 </body>
 </html>

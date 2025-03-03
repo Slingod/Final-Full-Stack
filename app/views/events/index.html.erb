@@ -43,7 +43,7 @@
           <p class="card-text"><strong>Number of registrants:</strong> <%= event.attendees.count %></p>
 
           <div class="mt-auto">
-            <%= link_to 'Show more', event_path(event), class: "btn btn-primary" %>
+            <%= link_to 'Show more', event_path(id: event.id, locale: I18n.locale), class: "btn btn-primary" %>
             <!-- Comment this section temporarily -->
             <%# if current_user&.admin? %>
               <%#= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

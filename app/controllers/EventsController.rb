@@ -8,48 +8,32 @@ class EventsController < ApplicationController
     if params[:year].present? && params[:month].present?
       year = params[:year].to_i
       month = params[:month].to_i
-  
-      # Adaptation pour SQLite : utilisation de strftime pour extraire l'année et le mois
       @events = Event.where("strftime('%Y', start_date) = ? AND strftime('%m', start_date) = ?", year.to_s, format('%02d', month))
     else
       @events = Event.all
     end
   end
-  
 
   def show
     if params[:year].present? && params[:month].present?
-      @photos = @event.photos.select do |photo|
-        photo.created_at.year.to_s == params[:year] && photo.created_at.month.to_s == params[:month]
-      end
-      @videos = @event.videos.select do |video|
-        video.created_at.year.to_s == params[:year] && video.created_at.month.to_s == params[:month]
-      end
+      @photos = @event.photos.where("strftime('%Y', created_at) = ? AND strftime('%m', created_at) = ?", params[:year], format('%02d', params[:month].to_i))
+      @videos = @event.videos.where("strftime('%Y', created_at) = ? AND strftime('%m', created_at) = ?", params[:year], format('%02d', params[:month].to_i))
     else
       @photos = @event.photos
       @videos = @event.videos
     end
-  end  
+  end
 
   def new
     @event = Event.new
   end
 
   def create
-    @event = current_user.events.build(event_params)
-  
+    @event = Event.new(event_params)
+
     if @event.save
-      if params[:event][:photos]
-        existing_filenames = @event.photos.map { |photo| photo.filename.to_s }
-  
-        params[:event][:photos].each do |photo|
-          unless existing_filenames.include?(photo.original_filename)
-            @event.photos.attach(photo)
-          end
-        end
-      end
-  
-      redirect_to @event, notice: "Event successfully created!"
+      attach_photos if params[:event][:photos].present?
+      redirect_to @event, notice: "Event successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -59,6 +43,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
+      attach_photos if params[:event][:photos].present?
       redirect_to @event, notice: "Event updated successfully."
     else
       render :edit, status: :unprocessable_entity
@@ -80,7 +65,7 @@ class EventsController < ApplicationController
 
   def unregister
     attendance = @event.event_attendances.find_by(user: current_user)
-    attendance.destroy if attendance
+    attendance&.destroy
     redirect_to event_path(@event), notice: 'Unregistration successful.'
   end
 
@@ -92,27 +77,37 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
+    @event = Event.find_by(id: params[:id])
+    return if @event
+
     flash[:alert] = "Event not found."
     redirect_to events_path
   end
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, photos: [])
+    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, photos: []).compact
+  end
+
+  def attach_photos
+    valid_photos = params[:event][:photos].reject { |photo| photo.is_a?(String) }
+    @event.photos.attach(valid_photos) if valid_photos.any?
   end
 
   def authenticate_user!
-    redirect_to login_path, alert: "You must be logged in." unless user_signed_in?
+    return if user_signed_in?
+
+    redirect_to login_path, alert: "You must be logged in."
   end
 
   def authorize_event_modification
-    unless current_user&.admin? || current_user&.organizer? || @event.user == current_user
-      redirect_to root_path, alert: "Access denied. You do not have permission to modify this event."
-    end
+    return if current_user&.admin? || current_user&.organizer? || @event.user == current_user
+
+    redirect_to root_path, alert: "Access denied. You do not have permission to modify this event."
   end
 
   def authorize_organizer
-    redirect_to events_path, alert: "You are not authorized to create events." unless current_user&.organizer? || current_user&.admin?
+    return if current_user&.organizer? || current_user&.admin?
+
+    redirect_to events_path, alert: "You are not authorized to create events."
   end
 end

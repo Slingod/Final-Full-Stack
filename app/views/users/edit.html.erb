@@ -1,6 +1,6 @@
 <h1>Edit Profile</h1>
 
-<%= form_with(model: @user, local: true, html: { multipart: true }) do |form| %>
+<%= form_with(model: @user, locale: I18n.locale, method: :patch, local: true, html: { multipart: true }) do |form| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -59,6 +59,6 @@
   </div>
 <% end %>
 
-<%= link_to 'Back', @user %>
+<%= link_to 'Back', user_path(@user, locale: I18n.locale) %>
 
-<%= button_to "Delete Account", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: "danger-button" %>
+<%= button_to "Delete Account", user_path(@user, locale: I18n.locale), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: "danger-button" %>

@@ -25,13 +25,15 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user, notice: "Profile updated successfully."
+      redirect_to user_path(@user, locale: I18n.locale), notice: 'Profile updated successfully.'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 

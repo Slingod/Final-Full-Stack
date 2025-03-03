@@ -1,21 +1,21 @@
 <h1>Welcome, Members!</h1>
-<p>Acces authorized</p>
+<p>Access authorized</p>
 <div class="card-container">
   <% @users.each do |user| %>
     <div class="card">
-      <!-- Affichage de la photo de profil ou image par défaut -->
+      <!-- Display profile picture or default image -->
       <% if user.profile_picture.attached? %>
-        <img src="<%= url_for(user.profile_picture) %>" alt="Photo de <%= user.first_name %>" class="card-img-top">
+        <img src="<%= url_for(user.profile_picture) %>" alt="<%= user.first_name %>'s photo" class="card-img-top">
       <% else %>
-        <img src="/assets/default-avatar.png" alt="Photo par défaut" class="card-img-top">
+        <img src="/assets/default-avatar.png" alt="Default profile picture" class="card-img-top">
       <% end %>
 
       <div class="card-body">
         <h5 class="card-title"><%= user.first_name %> <%= user.last_name %></h5>
         <p class="card-text">
-          <%= user.description.present? ? user.description : "Ajoutez une description dans votre profil." %>
+          <%= user.description.present? ? user.description : "Add a description to your profile." %>
         </p>
-        <a href="<%= edit_user_path(user) %>" class="btn btn-primary">Modifier mon profil</a>
+        <%= link_to "Edit my profile", edit_user_path(user), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

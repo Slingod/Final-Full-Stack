@@ -50,6 +50,9 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
+  #gem for translate everything on my website
+gem 'rails-i18n'
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
