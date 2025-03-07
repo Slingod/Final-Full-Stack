@@ -20,9 +20,10 @@ The wireframe for the project is available here:
 
 - [User Flow](https://whimsical.com/fullstackfinal-P1XYFdSBXN73n7xRAngMNd)
 - [WireFrame](https://whimsical.com/wireframefullstack-TFytgVQdEJAt3t2LC5umit)
-- [Projet Site Web.pptx](https://github.com/user-attachments/files/19105674/Projet.Site.Web.pptx)
+- [ProjectWebSite.pptx](https://github.com/user-attachments/files/19105674/Projet.Site.Web.pptx)
+- [JiraTableNEL](https://nouvelleerelissoise.atlassian.net/jira/core/projects/NEL/board)
 
-## Features
+## Features 
 
 ### Frontend
 
