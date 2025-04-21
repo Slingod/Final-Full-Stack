@@ -64,7 +64,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "bootstrap", "~> 5.1.3"
+gem "bootstrap", "~> 5.3.5"
 gem "sprockets-rails"
 
 group :development, :test do
